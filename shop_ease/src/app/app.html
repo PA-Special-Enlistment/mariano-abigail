@@ -5,15 +5,37 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
+  <ion-content class="card-background-page">
+
+    <ion-card>
+      <img src="./assets/imgs/menu2.jpg" />
+      <div class="card-title">SHOP EASE</div>
+      <div class="card-subtitle">Shop online. Shop safely. Shop with ease.</div>
+    </ion-card>
+
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
+
+      <ion-item>
+        <ion-icon name="walk" item-left large></ion-icon>
+        <h2> Jeans </h2>
+        <p> Premium quality jeans that supermodels love to wear </p>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="woman" item-left large></ion-icon>
+        <h2> Dress </h2>
+        <p> Elegant dress created by yours truly </p>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="heart" item-left large></ion-icon>
+        <h2> Sneakears </h2>
+        <p> I love adidas </p>
+      </ion-item>
+
     </ion-list>
   </ion-content>
 
 </ion-menu>
 
-<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
