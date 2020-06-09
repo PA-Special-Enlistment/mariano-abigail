@@ -1,6 +1,11 @@
 <ion-menu [content]="content" type="overlay">
   <ion-header>
     <ion-toolbar>
+      <ion-buttons start>
+        <button ion-button icon (click)="goToHomePage()" menuClose>
+          <ion-icon name="home"></ion-icon>
+        </button>
+      </ion-buttons>
       <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
@@ -15,19 +20,19 @@
 
     <ion-list>
 
-      <ion-item>
+      <ion-item (click)="openProductsByCategoryPage()" menuClose>
         <ion-icon name="walk" item-left large></ion-icon>
         <h2> Jeans </h2>
         <p> Premium quality jeans that supermodels love to wear </p>
       </ion-item>
 
-      <ion-item>
+      <ion-item (click)="openProductsByCategoryPage()" menuClose>
         <ion-icon name="woman" item-left large></ion-icon>
         <h2> Dress </h2>
         <p> Elegant dress created by yours truly </p>
       </ion-item>
 
-      <ion-item>
+      <ion-item (click)="openProductsByCategoryPage()" menuClose>
         <ion-icon name="heart" item-left large></ion-icon>
         <h2> Sneakears </h2>
         <p> I love adidas </p>
