@@ -1,5 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
 import { NavController, Slides, ToastController } from "ionic-angular";
+import { ProductDetailsPage } from "../product-details/product-details";
 
 @Component({
   selector: "page-home",
@@ -20,4 +21,8 @@ export class HomePage {
   }
 
   loadMoreProducts() {}
+
+  openProductsPage(index) {
+    this.navCtrl.push(ProductDetailsPage, { index: index });
+  }
 }

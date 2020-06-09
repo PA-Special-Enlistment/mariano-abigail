@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title> Product {{imageIndex}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-slides #productSlides autoplay="3000">
+      <ion-slide *ngFor="let i of [1,2,3,4]">
+        <img src="./assets/imgs/{{i}}.jpg" />
+      </ion-slide>
+    </ion-slides>
+
+    <ion-card-content>
+      <ion-card-title>
+        Product {{imageIndex}} &nbsp;
+        <ion-chip style="margin-left: 5px;">
+          <ion-label color="danger"> Jeans </ion-label>
+        </ion-chip>
+      </ion-card-title>
+
+      <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+          been the
+          industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book.
+      </p>
+
+      <button ion-button icon-left block outline color="danger">
+        <ion-icon name="basket"></ion-icon> Add to cart
+      </button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        Specifications
+      </ion-card-title>
+
+      <ion-grid>
+
+        <ion-row>
+          <ion-col col-4>
+            Color
+          </ion-col>
+          <ion-col col-8>
+            <span>Black</span>
+            <span>White</span>
+            <span>Blue</span>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col col-4>
+              Size
+            </ion-col>
+            <ion-col col-8>
+              <span>Small</span>
+              <span>Medium</span>
+              <span>Large</span>
+            </ion-col>
+          </ion-row>
+
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
