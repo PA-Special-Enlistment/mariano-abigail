@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { ProductDetailsPage } from '../product-details/product-details';
 
 @Component({
   selector: 'page-products-by-category',
@@ -12,6 +13,10 @@ export class ProductsByCategoryPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProductsByCategoryPage');
+  }
+
+  openProductsPage(index) {
+    this.navCtrl.push(ProductDetailsPage, { index: index });
   }
 
 }
