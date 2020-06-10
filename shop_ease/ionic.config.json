@@ -1,5 +1,7 @@
 {
   "name": "shop_ease",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }
