@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title> Product {{imageIndex}}</ion-title>
+    <ion-title> {{ product.name }}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -25,8 +25,8 @@
         {{ product.description }}
       </p>
 
-      <button ion-button icon-left block outline color="danger">
-        <ion-icon name="basket"></ion-icon> Add to cart
+      <button ion-button icon-left block outline color="danger" (click)="addToCart(product)">
+        <ion-icon name="basket"></ion-icon> Add to Cart for P{{ product.price }}
       </button>
     </ion-card-content>
   </ion-card>

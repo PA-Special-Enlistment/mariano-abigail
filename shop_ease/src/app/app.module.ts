@@ -11,6 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ProductsByCategoryPage } from '../pages/products-by-category/products-by-category';
 import { ProductDetailsPage } from '../pages/product-details/product-details';
 import { ProductManager } from '../models/ProductManager';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ProductManager } from '../models/ProductManager';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
