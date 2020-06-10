@@ -11,13 +11,13 @@
 
 <ion-content no-padding>
   <ion-list>
-    <ion-item *ngFor="let i of [1,2,3,4]" text-wrap (click)="openProductsPage(i)">
+    <ion-item *ngFor="let product of filteredProducts" text-wrap (click)="openProductsPage(product)">
       <ion-thumbnail item-left>
-        <img src="./assets/imgs/{{i}}.jpg" />
+        <img [src]="product?.imageUrls[0]" />
       </ion-thumbnail>
-      <h2>Product {{i}}</h2>
-      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-      <p>P{{i}}00</p>
+      <h2>{{ product.name }}</h2>
+      <p>{{ product.short_desc }}</p>
+      <p>{{ product.price }}</p>
 
       <button ion-button icon clear item-right>
         <ion-icon name="arrow-forward"></ion-icon>
