@@ -12,6 +12,7 @@ import { ProductsByCategoryPage } from '../pages/products-by-category/products-b
 import { ProductDetailsPage } from '../pages/product-details/product-details';
 import { ProductManager } from '../models/ProductManager';
 import { IonicStorageModule } from '@ionic/storage';
+import { CartModalPage } from '../pages/cart-modal/cart-modal';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage,
     ListPage,
     ProductsByCategoryPage,
-    ProductDetailsPage
+    ProductDetailsPage,
+    CartModalPage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage,
     ListPage,
     ProductsByCategoryPage,
-    ProductDetailsPage
+    ProductDetailsPage,
+    CartModalPage
   ],
   providers: [
     StatusBar,

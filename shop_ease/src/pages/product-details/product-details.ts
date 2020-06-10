@@ -3,10 +3,11 @@ import {
   NavController,
   NavParams,
   Slide,
-  ToastController
+  ToastController,
+  ModalController
 } from "ionic-angular";
 import { Storage } from "@ionic/storage";
-import { Product } from "../../models/Product";
+import { CartModalPage } from "../cart-modal/cart-modal";
 
 @Component({
   selector: "page-product-details",
@@ -22,7 +23,8 @@ export class ProductDetailsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public storage: Storage,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public modalCtrl: ModalController
   ) {
     this.product = this.navParams.get("product");
     console.log(this.product);
@@ -75,5 +77,9 @@ export class ProductDetailsPage {
           .present();
       });
     });
+  }
+
+  openCart() {
+    this.modalCtrl.create(CartModalPage).present();
   }
 }
