@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ProductsByCategoryPage } from '../pages/products-by-category/products-by-category';
 import { ProductDetailsPage } from '../pages/product-details/product-details';
+import { ProductManager } from '../models/ProductManager';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ProductDetailsPage } from '../pages/product-details/product-details';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ProductManager
   ]
 })
 export class AppModule {}
