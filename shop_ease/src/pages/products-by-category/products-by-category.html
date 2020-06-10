@@ -15,7 +15,7 @@
       <ion-thumbnail item-left>
         <img [src]="product?.imageUrls[0]" />
       </ion-thumbnail>
-      <h2>{{ product.name }}</h2>
+      <h2 class="name-label">{{product.brand.name}} {{ product.name }}</h2>
       <p>{{ product.short_desc }}</p>
       <p>{{ product.price }}</p>
 

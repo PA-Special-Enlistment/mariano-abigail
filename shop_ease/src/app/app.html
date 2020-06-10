@@ -3,10 +3,10 @@
     <ion-toolbar>
       <ion-buttons start>
         <button ion-button icon (click)="goToHomePage()" menuClose>
-          <ion-icon name="home"></ion-icon>
+          <ion-icon name="home" color="primary"></ion-icon>
         </button>
       </ion-buttons>
-      <ion-title>Menu</ion-title>
+      <ion-title color="primary">Menu</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -14,8 +14,8 @@
 
     <ion-card>
       <img src="./assets/imgs/menu2.jpg" />
-      <div class="card-title">SHOP EASE</div>
-      <div class="card-subtitle">Shop online. Shop safely. Shop with ease.</div>
+      <div class="card-title">Oh Pair!</div>
+      <div class="card-subtitle">Online Sneaker Store. Simple.</div>
     </ion-card>
 
     <ion-list>
@@ -24,7 +24,7 @@
         <ion-thumbnail item-left>
           <img src="{{ brand.logoUrl }}" />
         </ion-thumbnail>
-        <h2> {{ brand.name }} </h2>
+        <h2 class="name-label"> {{ brand.name }} </h2>
         <p> {{ brand.description }} </p>
       </ion-item>
 

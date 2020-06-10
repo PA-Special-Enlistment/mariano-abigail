@@ -7,20 +7,22 @@
 <ion-content>
 
   <ion-fab right top edge (click)="openCart()">
-    <button ion-fab color="danger"><ion-icon name="cart"></ion-icon></button>
+    <button ion-fab id="notifications-button" color="primary">
+      <ion-icon name="cart"></ion-icon>
+    </button>
   </ion-fab>
 
   <ion-card>
     <ion-slides #productSlides autoplay="3000" pager>
-      <ion-slide  *ngFor="let imageUrl of product.imageUrls">
+      <ion-slide *ngFor="let imageUrl of product.imageUrls">
         <img class="product-detail-image" src="{{ imageUrl }}" />
       </ion-slide>
     </ion-slides>
 
     <ion-card-content>
-      <ion-card-title>
+      <ion-card-title class="name-label" style="font-weight: bold">
         {{ product.brand.name }} {{ product.name }} &nbsp;
-        <ion-chip style="margin-left: 5px;">
+        <ion-chip style="margin-left: 5px; margin-bottom: 8px;">
           <ion-label color="danger"> {{ product.category }} </ion-label>
         </ion-chip>
       </ion-card-title>
@@ -29,7 +31,7 @@
         {{ product.description }}
       </p>
 
-      <button ion-button icon-left block outline color="danger" (click)="addToCart(product)">
+      <button ion-button icon-left block outline color="primary" (click)="addToCart(product)">
         <ion-icon name="basket"></ion-icon> Add to Cart for P{{ product.price }}
       </button>
     </ion-card-content>
@@ -37,14 +39,14 @@
 
   <ion-card>
     <ion-card-content>
-      <ion-card-title>
+      <ion-card-title class="name-label">
         Product Information
       </ion-card-title>
 
       <ion-grid>
 
         <ion-row *ngFor="let spec of product.specs">
-          <span padding>  • {{ spec }} </span>
+          <span padding> • {{ spec }} </span>
         </ion-row>
 
       </ion-grid>

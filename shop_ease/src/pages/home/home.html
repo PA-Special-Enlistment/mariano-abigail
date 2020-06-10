@@ -1,15 +1,15 @@
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
+      <ion-icon name="menu" color="primary"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title color="primary">Oh Pair!</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content no-padding>
 
-    <img style="margin-top: 10px;" src="https://i.makeagif.com/media/3-17-2016/Jfn9dG.gif">
+  <img style="margin-top: 10px;" src="https://i.makeagif.com/media/3-17-2016/Jfn9dG.gif">
 
   <ion-card class="home-large-banner">
     <ion-slides autoplay="5000" pager>
@@ -22,10 +22,10 @@
   <ion-grid>
     <ion-row>
       <ion-slides #productSlides>
-        <ion-slide *ngFor="let product of products">
+        <ion-slide *ngFor="let product of products" (click)="openProductsPage(product)">
           <ion-card no-padding>
             <img [src]="product.imageUrls[0]" />
-            <h1 padding center> {{ product.brand.name }} {{ product.name }} </h1>
+            <h1 padding center class="name-label"> {{ product.brand.name }} {{ product.name }} </h1>
             <p padding center>{{ product.description }}</p>
           </ion-card>
         </ion-slide>
@@ -38,7 +38,7 @@
       <ion-thumbnail item-left>
         <img [src]="product.imageUrls[0]" />
       </ion-thumbnail>
-      <h2>{{ product.brand.name }} {{ product.name }}</h2>
+      <h2 class="name-label">{{ product.brand.name }} {{ product.name }}</h2>
       <p>{{ product.short_desc }}</p>
       <p>P{{ product.price }}</p>
 
