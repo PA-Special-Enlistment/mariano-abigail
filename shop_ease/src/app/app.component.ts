@@ -6,6 +6,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { ProductsByCategoryPage } from '../pages/products-by-category/products-by-category';
+import { Product } from '../models/Product';
+import { ProductManager } from '../models/ProductManager';
+import { Brand } from '../models/Brand';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,17 +18,12 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  brands: Brand[] = [];
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public productManager: ProductManager) {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
-    ];
-
+    this.brands = [];
+    this.getBrands();
   }
 
   initializeApp() {
@@ -37,13 +35,34 @@ export class MyApp {
     });
   }
 
+  getBrands() {
+    let brand1 = new Brand();
+    brand1.name = "Adidas";
+    brand1.description = "All in or Nothing"
+    brand1.logoUrl = "https://cloud.melijoe.com/p/f58b2842_1549938601_z_adidas-originals_252960_B.jpg";
+
+    let brand2 = new Brand();
+    brand2.name = "Nike";
+    brand2.description = "Just Do It"
+    brand2.logoUrl = "https://n.sinaimg.cn/front/462/w241h221/20190313/QNkr-hufnxfn0149679.jpg"
+
+    let brand3 = new Brand();
+    brand3.name = "Jordan";
+    brand3.description = "Become Legendary";
+    brand3.logoUrl = "https://i.pinimg.com/236x/55/92/48/5592485512377af8624b2bdad817825a--jordan-logo-jorden.jpg";
+
+    this.brands.push(brand1);
+    this.brands.push(brand3);
+    this.brands.push(brand2);
+  }
+
   goToHomePage() {
     this.nav.setRoot(HomePage);
   }
 
-  openProductsByCategoryPage() {
+  openProductsByCategoryPage(brand) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(ProductsByCategoryPage);
+    this.nav.setRoot(ProductsByCategoryPage, { brand: brand });
   }
 }

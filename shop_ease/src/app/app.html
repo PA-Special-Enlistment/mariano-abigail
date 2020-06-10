@@ -20,22 +20,12 @@
 
     <ion-list>
 
-      <ion-item (click)="openProductsByCategoryPage()" menuClose>
-        <ion-icon name="walk" item-left large></ion-icon>
-        <h2> Jeans </h2>
-        <p> Premium quality jeans that supermodels love to wear </p>
-      </ion-item>
-
-      <ion-item (click)="openProductsByCategoryPage()" menuClose>
-        <ion-icon name="woman" item-left large></ion-icon>
-        <h2> Dress </h2>
-        <p> Elegant dress created by yours truly </p>
-      </ion-item>
-
-      <ion-item (click)="openProductsByCategoryPage()" menuClose>
-        <ion-icon name="heart" item-left large></ion-icon>
-        <h2> Sneakears </h2>
-        <p> I love adidas </p>
+      <ion-item *ngFor="let brand of brands" (click)="openProductsByCategoryPage(brand.name)" menuClose>
+        <ion-thumbnail item-left>
+          <img src="{{ brand.logoUrl }}" />
+        </ion-thumbnail>
+        <h2> {{ brand.name }} </h2>
+        <p> {{ brand.description }} </p>
       </ion-item>
 
     </ion-list>
