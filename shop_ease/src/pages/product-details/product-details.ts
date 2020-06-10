@@ -9,14 +9,11 @@ export class ProductDetailsPage {
 
   @ViewChild("productSlides") productSlides: Slide;
 
-  // product: any;
-  imageIndex = 0;
+  product: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.imageIndex = this.navParams.get("index");
-    console.log(this.imageIndex);
-    // this.product = this.navParams.get("products");
-    // console.log(this.product);
+    this.product = this.navParams.get("product");
+    console.log(this.product);
   }
 
   ionViewDidLoad() {

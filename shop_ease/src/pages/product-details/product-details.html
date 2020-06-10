@@ -7,25 +7,22 @@
 <ion-content>
 
   <ion-card>
-    <ion-slides #productSlides autoplay="3000">
-      <ion-slide *ngFor="let i of [1,2,3,4]">
-        <img src="./assets/imgs/{{i}}.jpg" />
+    <ion-slides #productSlides autoplay="3000" pager>
+      <ion-slide  *ngFor="let imageUrl of product.imageUrls">
+        <img class="product-detail-image" src="{{ imageUrl }}" />
       </ion-slide>
     </ion-slides>
 
     <ion-card-content>
       <ion-card-title>
-        Product {{imageIndex}} &nbsp;
+        {{ product.brand.name }} {{ product.name }} &nbsp;
         <ion-chip style="margin-left: 5px;">
-          <ion-label color="danger"> Jeans </ion-label>
+          <ion-label color="danger"> {{ product.category }} </ion-label>
         </ion-chip>
       </ion-card-title>
 
       <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-          been the
-          industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
+        {{ product.description }}
       </p>
 
       <button ion-button icon-left block outline color="danger">
@@ -37,32 +34,14 @@
   <ion-card>
     <ion-card-content>
       <ion-card-title>
-        Specifications
+        Product Information
       </ion-card-title>
 
       <ion-grid>
 
-        <ion-row>
-          <ion-col col-4>
-            Color
-          </ion-col>
-          <ion-col col-8>
-            <span>Black</span>
-            <span>White</span>
-            <span>Blue</span>
-          </ion-col>
+        <ion-row *ngFor="let spec of product.specs">
+          <span padding>  • {{ spec }} </span>
         </ion-row>
-
-        <ion-row>
-            <ion-col col-4>
-              Size
-            </ion-col>
-            <ion-col col-8>
-              <span>Small</span>
-              <span>Medium</span>
-              <span>Large</span>
-            </ion-col>
-          </ion-row>
 
       </ion-grid>
     </ion-card-content>
