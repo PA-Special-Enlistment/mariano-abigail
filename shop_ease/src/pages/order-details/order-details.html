@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Order Details</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+  <ion-item-divider color="dark" class="name-label">Shipping Address</ion-item-divider>
+  <ion-item>
+    <ion-icon name="md-home" color="primary" item-left large></ion-icon>
+    <h2>Joseph Castelo</h2>
+    <h2>09153960030</h2>
+    <p>182 Brgy. Burgos, Sta. Rosa, Nueva Ecija</p>
+  </ion-item>
+
+  <ion-item-divider color="dark" class="name-label">Package</ion-item-divider>
+  <ion-item *ngFor="let i of [1,2,3]">
+    <ion-thumbnail item-left>
+      <img
+        src="https://assets.adidas.com/images/h_840,f_auto,q_auto:sensitive,fl_lossy/4290012d8fba42a48795ab0a00c8c50d_9366/Ultraboost_20_Shoes_Black_EG0698_01_standard.jpg" />
+    </ion-thumbnail>
+    <h2>Adidas Ultraboost 20</h2>
+    <h3>P9,500</h3>
+    <p>x1</p>
+  </ion-item>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        Subtotal
+      </ion-col>
+      <ion-col style="text-align: right">
+        P15,000
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        Shipping Fee
+      </ion-col>
+      <ion-col style="text-align: right">
+        Free
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <span class="name-label">Total</span>
+      </ion-col>
+      <ion-col style="text-align: right">
+        <span class="name-label">P15,000</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-item-divider color="dark">Order #1234567</ion-item-divider>
+  <ion-item>
+    <p>Placed on 11 Jun 2020 12:30:45</p>
+  </ion-item>
+  <ion-item-divider color="dark">Payment Method</ion-item-divider>
+  <ion-item>
+    <ion-icon item-left large name="md-cash" color="primary"></ion-icon>
+    <ion-label>Cash on Delivery</ion-label>
+  </ion-item>
+
+</ion-content>

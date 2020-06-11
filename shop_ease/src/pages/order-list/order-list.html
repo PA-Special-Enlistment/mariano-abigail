@@ -12,7 +12,7 @@
   </ion-segment>
 
   <ion-list style="padding-top: 15px">
-    <ion-card *ngFor="let i of [1,2,3,4,5]">
+    <ion-card *ngFor="let i of [1,2,3,4,5]" (click)="viewOrderDetails()">
       <ion-grid>
         <ion-row>
           <ion-col col-8>

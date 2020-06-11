@@ -15,6 +15,7 @@ import { CheckoutPage } from "../pages/checkout/checkout";
 import { CartModalPage } from "../pages/cart-modal/cart-modal";
 import { Storage } from "@ionic/storage";
 import { OrderListPage } from "../pages/order-list/order-list";
+import { OrderDetailsPage } from "../pages/order-details/order-details";
 
 @Component({
   templateUrl: "app.html"

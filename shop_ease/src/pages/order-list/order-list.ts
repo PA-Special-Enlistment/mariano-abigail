@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { OrderDetailsPage } from '../order-details/order-details';
 
 @Component({
   selector: 'page-order-list',
@@ -17,4 +18,7 @@ export class OrderListPage {
     console.log('ionViewDidLoad OrderListPage');
   }
 
+  viewOrderDetails() {
+    this.navCtrl.push(OrderDetailsPage)
+  }
 }
