@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>My Orders</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+  <ion-segment [(ngModel)]="order_status">
+    <ion-segment-button value="all">All</ion-segment-button>
+    <ion-segment-button value="processing">Processing</ion-segment-button>
+    <ion-segment-button value="completed">Completed</ion-segment-button>
+  </ion-segment>
+
+  <ion-list style="padding-top: 15px">
+    <ion-card *ngFor="let i of [1,2,3,4,5]">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-8>
+            <h2 class="name-label">Order 1234567</h2>
+            <p>Placed on 11 Jun 2020 12:30:45</p>
+          </ion-col>
+          <ion-col col-4>
+            <p style="text-align: right; font-style: italic">COD</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-item>
+        <ion-thumbnail item-left>
+          <img
+            src="https://assets.adidas.com/images/h_840,f_auto,q_auto:sensitive,fl_lossy/4290012d8fba42a48795ab0a00c8c50d_9366/Ultraboost_20_Shoes_Black_EG0698_01_standard.jpg" />
+        </ion-thumbnail>
+        <h2>Adidas Ultraboost 20</h2>
+        <h3>P9,500</h3>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-8><p>x1</p></ion-col>
+            <ion-col col-4><p style="text-align: right; font-style: italic">Processing</p></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <h2 style="text-align: right; padding-right: 10px">2 Items, Total: <span class="name-label">P15,000</span></h2>
+    </ion-card>
+
+  </ion-list>
+</ion-content>

@@ -16,6 +16,7 @@ import { CartModalPage } from '../pages/cart-modal/cart-modal';
 import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
 import { CheckoutPage } from '../pages/checkout/checkout';
+import { OrderListPage } from '../pages/order-list/order-list';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CheckoutPage } from '../pages/checkout/checkout';
     CartModalPage,
     SignupPage,
     LoginPage,
-    CheckoutPage
+    CheckoutPage,
+    OrderListPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import { CheckoutPage } from '../pages/checkout/checkout';
     CartModalPage,
     SignupPage,
     LoginPage,
-    CheckoutPage
+    CheckoutPage,
+    OrderListPage
   ],
   providers: [
     StatusBar,

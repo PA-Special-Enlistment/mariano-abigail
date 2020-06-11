@@ -14,6 +14,7 @@ import { LoginPage } from "../pages/login/login";
 import { CheckoutPage } from "../pages/checkout/checkout";
 import { CartModalPage } from "../pages/cart-modal/cart-modal";
 import { Storage } from "@ionic/storage";
+import { OrderListPage } from "../pages/order-list/order-list";
 
 @Component({
   templateUrl: "app.html"
@@ -92,6 +93,8 @@ export class MyApp {
     } else if (pageName == "cart") {
       let modal = this.modalCtrl.create(CartModalPage);
       modal.present();
+    } else if (pageName == 'orders') {
+      this.nav.push(OrderListPage);
     } else if (pageName == "logout") {
       // this.nav.push("");
       this.storage.remove("userLoginInfo").then(() => {

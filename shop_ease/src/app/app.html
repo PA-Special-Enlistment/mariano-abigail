@@ -50,9 +50,15 @@
 
       <ion-item *ngIf="isLoggedIn" (click)="openPage('cart')" menuClose>
         <ion-icon name="cart" item-left large></ion-icon>
-        <h2 class="name-label">Your Cart</h2>
+        <h2 class="name-label">Cart</h2>
         <p>Check items in your cart</p>
       </ion-item>
+
+      <ion-item *ngIf="isLoggedIn" (click)="openPage('orders')" menuClose>
+          <ion-icon name="shirt" item-left large></ion-icon>
+          <h2 class="name-label">Orders</h2>
+          <p>Check your orders</p>
+        </ion-item>
 
       <ion-item *ngIf="isLoggedIn" (click)="openPage('logout')" menuClose>
         <ion-icon name="log-out" item-left large></ion-icon>
