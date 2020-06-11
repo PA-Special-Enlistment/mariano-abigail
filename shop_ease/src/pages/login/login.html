@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+  <ion-card>
+    <img src="./assets/imgs/menu-logo.png" style="width: 100%; margin: auto;" />
+  </ion-card>
+
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Username</ion-label>
+      <ion-input autocomplete="off" type="text" [(ngModel)]="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input autocomplete="new-password" type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button block color="primary" (click)="login()">Login</button>
+  <button clear ion-button block color="primary" (click)="signup()">No account yet? Signup Now!</button>
+</ion-content>

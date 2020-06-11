@@ -10,6 +10,7 @@ import { Product } from '../models/Product';
 import { ProductManager } from '../models/ProductManager';
 import { Brand } from '../models/Brand';
 import { SignupPage } from '../pages/signup/signup';
+import { LoginPage } from '../pages/login/login';
 
 @Component({
   templateUrl: 'app.html'
@@ -17,7 +18,7 @@ import { SignupPage } from '../pages/signup/signup';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = SignupPage;
+  rootPage: any = HomePage;
 
   brands: Brand[] = [];
 
@@ -65,5 +66,13 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(ProductsByCategoryPage, { brand: brand });
+  }
+
+  openPage(pageName: string) {
+    if (pageName == 'signup') {
+      this.nav.push(SignupPage);
+    } else if (pageName == 'login') {
+      this.nav.push(LoginPage);
+    }
   }
 }

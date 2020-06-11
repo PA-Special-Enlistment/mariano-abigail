@@ -38,7 +38,7 @@
 
       <ion-item>
         <ion-label>Username</ion-label>
-        <ion-input type="text" formControlName="username"></ion-input>
+        <ion-input automplete="off" type="text" formControlName="username"></ion-input>
       </ion-item>
 
       <div class="error-message" *ngIf="signupForm.get('username').errors?.required && signupForm.get('username').touched">
@@ -47,7 +47,7 @@
 
       <ion-item>
         <ion-label>Password</ion-label>
-        <ion-input type="password" formControlName="password"></ion-input>
+        <ion-input autocomplete="new-password" type="password" formControlName="password"></ion-input>
       </ion-item>
 
       <div class="error-message" *ngIf="signupForm.get('password').errors?.required && signupForm.get('password').touched">
