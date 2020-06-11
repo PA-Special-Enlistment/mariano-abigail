@@ -32,5 +32,10 @@
 
 .error-message{
     color: #f53d3d;
-    background-color: transparent;
+    background-color: #242424;
+    padding-left: 15px;
+}
+
+ion-textarea:focus, ion-input:focus{
+    outline: none;
 }

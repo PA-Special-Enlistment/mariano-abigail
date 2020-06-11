@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content no-padding>
-  <form [formGroup]="signupForm">
+  <form [formGroup]="userForm">
     <ion-list>
       <ion-item-divider color="primary">Personal Details</ion-item-divider>
 
@@ -14,7 +14,7 @@
         <ion-input type="text" formControlName="first_name"></ion-input>
       </ion-item>
 
-      <div class="error-message" *ngIf="signupForm.get('first_name').errors?.required && signupForm.get('first_name').touched">
+      <div class="error-message" *ngIf="userForm.get('first_name').errors?.required && userForm.get('first_name').touched">
         First Name is required.
       </div>
 
@@ -23,16 +23,16 @@
         <ion-input type="text" formControlName="last_name"></ion-input>
       </ion-item>
 
-      <div class="error-message" *ngIf="signupForm.get('last_name').errors?.required && signupForm.get('last_name').touched">
+      <div class="error-message" *ngIf="userForm.get('last_name').errors?.required && userForm.get('last_name').touched">
           Last Name is required.
         </div>
 
       <ion-item>
         <ion-label>Email</ion-label>
-        <ion-input type="email" formControlName="email" (blur)="checkEmail()"></ion-input>
+        <ion-input type="email" formControlName="email"></ion-input>
       </ion-item>
 
-      <div class="error-message" *ngIf="signupForm.get('email').errors?.required && signupForm.get('email').touched">
+      <div class="error-message" *ngIf="userForm.get('email').errors?.required && userForm.get('email').touched">
           Email is required.
         </div>
 
@@ -41,7 +41,7 @@
         <ion-input automplete="off" type="text" formControlName="username"></ion-input>
       </ion-item>
 
-      <div class="error-message" *ngIf="signupForm.get('username').errors?.required && signupForm.get('username').touched">
+      <div class="error-message" *ngIf="userForm.get('username').errors?.required && userForm.get('username').touched">
           Username is required.
         </div>
 
@@ -50,7 +50,7 @@
         <ion-input autocomplete="new-password" type="password" formControlName="password"></ion-input>
       </ion-item>
 
-      <div class="error-message" *ngIf="signupForm.get('password').errors?.required && signupForm.get('password').touched">
+      <div class="error-message" *ngIf="userForm.get('password').errors?.required && userForm.get('password').touched">
           Password is required.
       </div>
 
@@ -59,7 +59,7 @@
         <ion-input type="password" formControlName="confirm_password"></ion-input>
       </ion-item>
 
-      <div class="error-message" *ngIf="signupForm.get('confirm_password').errors?.required && signupForm.get('confirm_password').touched">
+      <div class="error-message" *ngIf="userForm.get('confirm_password').errors?.required && userForm.get('confirm_password').touched">
           Confirm Password is required.
         </div>
 
@@ -70,7 +70,7 @@
         <ion-textarea type="text" maxlength="80" formControlName="s_address_1"></ion-textarea>
       </ion-item>
       
-      <div class="error-message" *ngIf="signupForm.get('s_address_1').errors?.required && signupForm.get('s_address_1').touched">
+      <div class="error-message" *ngIf="userForm.get('s_address_1').errors?.required && userForm.get('s_address_1').touched">
           Shipping Address Line 1 is required.
         </div>
 
@@ -86,7 +86,7 @@
         </ion-select>
       </ion-item>
 
-      <div class="error-message" *ngIf="signupForm.get('s_country').errors?.required && signupForm.get('s_country').touched">
+      <div class="error-message" *ngIf="userForm.get('s_country').errors?.required && userForm.get('s_country').touched">
           Shipping Country is required.
         </div>
 
@@ -97,7 +97,7 @@
         </ion-select>
       </ion-item>
 
-      <div class="error-message" *ngIf="signupForm.get('s_province').errors?.required && signupForm.get('s_province').touched">
+      <div class="error-message" *ngIf="userForm.get('s_province').errors?.required && userForm.get('s_province').touched">
           Shipping Province is required.
         </div>
 
@@ -108,7 +108,7 @@
         </ion-select>
       </ion-item>
 
-      <div class="error-message" *ngIf="signupForm.get('s_city').errors?.required && signupForm.get('s_city').touched">
+      <div class="error-message" *ngIf="userForm.get('s_city').errors?.required && userForm.get('s_city').touched">
           Shipping City is required.
         </div>
 
@@ -117,7 +117,7 @@
         <ion-input type="text" formControlName="s_phone"></ion-input>
       </ion-item>
 
-      <div class="error-message" *ngIf="signupForm.get('s_phone').errors?.required && signupForm.get('s_phone').touched">
+      <div class="error-message" *ngIf="userForm.get('s_phone').errors?.required && userForm.get('s_phone').touched">
           Shipping Phone is required.
         </div>
 
@@ -134,7 +134,7 @@
           <ion-textarea type="text" maxlength="80" formControlName="b_address_1"></ion-textarea>
         </ion-item>
 
-        <div class="error-message" *ngIf="signupForm.get('b_address_1').errors?.required && signupForm.get('b_address_1').touched">
+        <div class="error-message" *ngIf="userForm.get('b_address_1').errors?.required && userForm.get('b_address_1').touched">
             Billing Address Line 1 is required.
           </div>
 
@@ -150,7 +150,7 @@
           </ion-select>
         </ion-item>
 
-        <div class="error-message" *ngIf="signupForm.get('s_country').errors?.required && signupForm.get('s_country').touched">
+        <div class="error-message" *ngIf="userForm.get('s_country').errors?.required && userForm.get('s_country').touched">
             Billing Country is required.
           </div>
 
@@ -161,18 +161,18 @@
           </ion-select>
         </ion-item>
 
-        <div class="error-message" *ngIf="signupForm.get('s_province').errors?.required && signupForm.get('s_province').touched">
+        <div class="error-message" *ngIf="userForm.get('s_province').errors?.required && userForm.get('s_province').touched">
             Billing Province is required.
           </div>
 
         <ion-item>
           <ion-label>City</ion-label>
           <ion-select formControlName="b_city">
-            <ion-option value="Nueva Ecija" selected="true">Lupao</ion-option>
+            <ion-option value="Lupao" selected="true">Lupao</ion-option>
           </ion-select>
         </ion-item>
 
-        <div class="error-message" *ngIf="signupForm.get('s_city').errors?.required && signupForm.get('s_city').touched">
+        <div class="error-message" *ngIf="userForm.get('s_city').errors?.required && userForm.get('s_city').touched">
             Billing City is required.
           </div>
 
@@ -182,7 +182,7 @@
         </ion-item>
       </div>
 
-      <div class="error-message" *ngIf="signupForm.get('b_phone').errors?.required && signupForm.get('b_phone').touched">
+      <div class="error-message" *ngIf="userForm.get('b_phone').errors?.required && userForm.get('b_phone').touched">
           Billing Phone is required.
         </div>
 
