@@ -28,16 +28,36 @@
         <p> {{ brand.description }} </p>
       </ion-item>
 
-      <ion-item (click)="openPage('signup')" menuClose>
+      <ion-item-divider color="primary">Account</ion-item-divider>
+
+      <ion-item *ngIf="!isLoggedIn" (click)="openPage('signup')" menuClose>
         <ion-icon name="md-clipboard" item-left large></ion-icon>
         <h2 class="name-label">Sign Up</h2>
         <p>for a new account</p>
       </ion-item>
 
-      <ion-item (click)="openPage('login')" menuClose>
+      <ion-item *ngIf="!isLoggedIn" (click)="openPage('login')" menuClose>
         <ion-icon name="log-in" item-left large></ion-icon>
         <h2 class="name-label">Login</h2>
         <p>Using username and password</p>
+      </ion-item>
+
+      <ion-item *ngIf="isLoggedIn" menuClose>
+        <ion-icon name="contact" item-left large></ion-icon>
+        <h2 class="name-label">Abigail</h2>
+        <p>Welcome</p>
+      </ion-item>
+
+      <ion-item *ngIf="isLoggedIn" (click)="openPage('cart')" menuClose>
+        <ion-icon name="cart" item-left large></ion-icon>
+        <h2 class="name-label">Your Cart</h2>
+        <p>Check items in your cart</p>
+      </ion-item>
+
+      <ion-item *ngIf="isLoggedIn" (click)="openPage('logout')" menuClose>
+        <ion-icon name="log-out" item-left large></ion-icon>
+        <h2 class="name-label">Logout</h2>
+        <p>of your account</p>
       </ion-item>
 
     </ion-list>
