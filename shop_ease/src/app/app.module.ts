@@ -15,6 +15,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { CartModalPage } from '../pages/cart-modal/cart-modal';
 import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
+import { CheckoutPage } from '../pages/checkout/checkout';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LoginPage } from '../pages/login/login';
     ProductDetailsPage,
     CartModalPage,
     SignupPage,
-    LoginPage
+    LoginPage,
+    CheckoutPage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,8 @@ import { LoginPage } from '../pages/login/login';
     ProductDetailsPage,
     CartModalPage,
     SignupPage,
-    LoginPage
+    LoginPage,
+    CheckoutPage
   ],
   providers: [
     StatusBar,

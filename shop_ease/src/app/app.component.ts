@@ -11,6 +11,7 @@ import { ProductManager } from '../models/ProductManager';
 import { Brand } from '../models/Brand';
 import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
+import { CheckoutPage } from "../pages/checkout/checkout";
 
 @Component({
   templateUrl: 'app.html'

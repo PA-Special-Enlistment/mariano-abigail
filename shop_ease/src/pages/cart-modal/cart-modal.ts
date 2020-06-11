@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { Storage } from "@ionic/storage";
+import { CheckoutPage } from '../checkout/checkout';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-cart-modal',
@@ -59,6 +61,17 @@ export class CartModalPage {
 
   closeModal() {
     this.viewCtrl.dismiss();
+  }
+
+  checkout() {
+    this.navCtrl.push(CheckoutPage)
+    // this.storage.get("userLogininfo")
+    // .then(data => {
+
+    //   data ? this.navCtrl.push(CheckoutPage) : this.navCtrl.push(LoginPage, {next: CheckoutPage})
+
+    // })
+
   }
 
 }

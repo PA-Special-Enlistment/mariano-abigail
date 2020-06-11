@@ -1,0 +1,219 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Checkout</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+  <form [formGroup]="orderForm">
+    <ion-list>
+      <ion-item-divider color="primary">Personal Details</ion-item-divider>
+
+      <ion-item>
+        <ion-label>First Name</ion-label>
+        <ion-input type="text" formControlName="first_name"></ion-input>
+      </ion-item>
+
+      <div class="error-message"
+        *ngIf="orderForm.get('first_name').errors?.required && orderForm.get('first_name').touched">
+        First Name is required.
+      </div>
+
+      <ion-item>
+        <ion-label>Last Name</ion-label>
+        <ion-input type="text" formControlName="last_name"></ion-input>
+      </ion-item>
+
+      <div class="error-message"
+        *ngIf="orderForm.get('last_name').errors?.required && orderForm.get('last_name').touched">
+        Last Name is required.
+      </div>
+
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-input type="email" formControlName="email" (blur)="checkEmail()"></ion-input>
+      </ion-item>
+
+      <div class="error-message" *ngIf="orderForm.get('email').errors?.required && orderForm.get('email').touched">
+        Email is required.
+      </div>
+
+      <ion-item>
+        <ion-label>Username</ion-label>
+        <ion-input automplete="off" type="text" formControlName="username"></ion-input>
+      </ion-item>
+
+      <div class="error-message"
+        *ngIf="orderForm.get('username').errors?.required && orderForm.get('username').touched">
+        Username is required.
+      </div>
+
+      <ion-item>
+        <ion-label>Password</ion-label>
+        <ion-input autocomplete="new-password" type="password" formControlName="password"></ion-input>
+      </ion-item>
+
+      <div class="error-message"
+        *ngIf="orderForm.get('password').errors?.required && orderForm.get('password').touched">
+        Password is required.
+      </div>
+
+      <ion-item>
+        <ion-label>Confirm Password</ion-label>
+        <ion-input type="password" formControlName="confirm_password"></ion-input>
+      </ion-item>
+
+      <div class="error-message"
+        *ngIf="orderForm.get('confirm_password').errors?.required && orderForm.get('confirm_password').touched">
+        Confirm Password is required.
+      </div>
+
+      <ion-item-divider color="primary">Shipping Address</ion-item-divider>
+
+      <ion-item>
+        <ion-label>Address Line 1</ion-label>
+        <ion-textarea type="text" maxlength="80" formControlName="s_address_1"></ion-textarea>
+      </ion-item>
+
+      <div class="error-message"
+        *ngIf="orderForm.get('s_address_1').errors?.required && orderForm.get('s_address_1').touched">
+        Shipping Address Line 1 is required.
+      </div>
+
+      <ion-item>
+        <ion-label>Address Line 2</ion-label>
+        <ion-textarea type="text" maxlength="80" formControlName="s_address_2"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Country</ion-label>
+        <ion-select formControlName="s_country">
+          <ion-option value="PH" selected="true">Philippines</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="error-message"
+        *ngIf="orderForm.get('s_country').errors?.required && orderForm.get('s_country').touched">
+        Shipping Country is required.
+      </div>
+
+      <ion-item>
+        <ion-label>Province</ion-label>
+        <ion-select formControlName="s_province">
+          <ion-option value="Nueva Ecija" selected="true">Nueva Ecija</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="error-message"
+        *ngIf="orderForm.get('s_province').errors?.required && orderForm.get('s_province').touched">
+        Shipping Province is required.
+      </div>
+
+      <ion-item>
+        <ion-label>City</ion-label>
+        <ion-select formControlName="s_city">
+          <ion-option value="Nueva Ecija" selected="true">Lupao</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="error-message" *ngIf="orderForm.get('s_city').errors?.required && orderForm.get('s_city').touched">
+        Shipping City is required.
+      </div>
+
+      <ion-item>
+        <ion-label>Phone</ion-label>
+        <ion-input type="text" formControlName="s_phone"></ion-input>
+      </ion-item>
+
+      <div class="error-message"
+        *ngIf="orderForm.get('s_phone').errors?.required && orderForm.get('s_phone').touched">
+        Shipping Phone is required.
+      </div>
+
+      <ion-item>
+        <ion-label text-wrap>Billing Address same as Shipping Address</ion-label>
+        <ion-checkbox (ionChange)="setBillingToShipping()"></ion-checkbox>
+      </ion-item>
+
+      <div *ngIf="!billing_shipping_same">
+        <ion-item-divider color="primary">Billing Address</ion-item-divider>
+
+        <ion-item>
+          <ion-label>Address Line 1</ion-label>
+          <ion-textarea type="text" maxlength="80" formControlName="b_address_1"></ion-textarea>
+        </ion-item>
+
+        <div class="error-message"
+          *ngIf="orderForm.get('b_address_1').errors?.required && orderForm.get('b_address_1').touched">
+          Billing Address Line 1 is required.
+        </div>
+
+        <ion-item>
+          <ion-label>Address Line 2</ion-label>
+          <ion-textarea type="text" maxlength="80" formControlName="b_address_2"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Country</ion-label>
+          <ion-select formControlName="b_country">
+            <ion-option value="PH" selected="true">Philippines</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <div class="error-message"
+          *ngIf="orderForm.get('s_country').errors?.required && orderForm.get('s_country').touched">
+          Billing Country is required.
+        </div>
+
+        <ion-item>
+          <ion-label>Province</ion-label>
+          <ion-select formControlName="b_province">
+            <ion-option value="Nueva Ecija" selected="true">Nueva Ecija</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <div class="error-message"
+          *ngIf="orderForm.get('s_province').errors?.required && orderForm.get('s_province').touched">
+          Billing Province is required.
+        </div>
+
+        <ion-item>
+          <ion-label>City</ion-label>
+          <ion-select formControlName="b_city">
+            <ion-option value="Nueva Ecija" selected="true">Lupao</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <div class="error-message"
+          *ngIf="orderForm.get('s_city').errors?.required && orderForm.get('s_city').touched">
+          Billing City is required.
+        </div>
+
+        <ion-item>
+          <ion-label>Phone</ion-label>
+          <ion-input type="text" formControlName="b_phone"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="error-message"
+        *ngIf="orderForm.get('b_phone').errors?.required && orderForm.get('b_phone').touched">
+        Billing Phone is required.
+      </div>
+
+      <ion-item-divider color="primary">Payment Details</ion-item-divider>
+
+      <ion-item>
+        <ion-label>Payment Method</ion-label>
+        <ion-select formControlName="paymentMethod">
+          <ion-option *ngFor="let p of paymentMethods" value="{{ p.method_id }}">{{ p.method_title }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-list>
+  </form>
+
+</ion-content>
+
+<ion-footer>
+  <button type="submit" ion-button block color="primary" (click)='signup()'>Sign Up</button>
+</ion-footer>
