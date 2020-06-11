@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title> {{ product.name }}</ion-title>
+    <ion-title> {{ product.product_name }}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -13,15 +13,15 @@
   </ion-fab>
 
   <ion-card>
-    <ion-slides #productSlides autoplay="3000" pager>
-      <ion-slide *ngFor="let imageUrl of product.imageUrls">
-        <img class="product-detail-image" src="{{ imageUrl }}" />
+    <ion-slides *ngIf="images && images.length" #productSlides autoplay="3000" pager loop="true">
+      <ion-slide *ngFor="let image of images">
+        <img class="product-detail-image" src="{{ image?.image_url }}" />
       </ion-slide>
     </ion-slides>
 
     <ion-card-content>
       <ion-card-title class="name-label" style="font-weight: bold">
-        {{ product.brand.name }} {{ product.name }} &nbsp;
+        {{ product.brand }} {{ product.product_name }} &nbsp;
         <ion-chip style="margin-left: 5px; margin-bottom: 8px;">
           <ion-label color="danger"> {{ product.category }} </ion-label>
         </ion-chip>
@@ -45,8 +45,8 @@
 
       <ion-grid>
 
-        <ion-row *ngFor="let spec of product.specs">
-          <span padding> • {{ spec }} </span>
+        <ion-row *ngFor="let spec of specs">
+          <span padding> • {{ spec.specs }} </span>
         </ion-row>
 
       </ion-grid>

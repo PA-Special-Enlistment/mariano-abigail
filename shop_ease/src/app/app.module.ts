@@ -18,6 +18,7 @@ import { LoginPage } from '../pages/login/login';
 import { CheckoutPage } from '../pages/checkout/checkout';
 import { OrderListPage } from '../pages/order-list/order-list';
 import { OrderDetailsPage } from '../pages/order-details/order-details';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { OrderDetailsPage } from '../pages/order-details/order-details';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

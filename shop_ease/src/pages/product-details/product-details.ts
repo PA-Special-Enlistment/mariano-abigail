@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, ViewChild, OnInit, AfterViewInit } from "@angular/core";
 import {
   NavController,
   NavParams,
@@ -8,6 +8,7 @@ import {
 } from "ionic-angular";
 import { Storage } from "@ionic/storage";
 import { CartModalPage } from "../cart-modal/cart-modal";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "page-product-details",
@@ -16,22 +17,41 @@ import { CartModalPage } from "../cart-modal/cart-modal";
 export class ProductDetailsPage {
   @ViewChild("productSlides") productSlides: Slide;
 
-  product;
-  any;
+  product: any = {};
+  specs: any = [];
+  images: any = [];
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public storage: Storage,
     public toastCtrl: ToastController,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public http: HttpClient
   ) {
-    this.product = this.navParams.get("product");
-    console.log(this.product);
+    let product_id = this.navParams.get("product_id");
+    this.getProductDetails(product_id);
   }
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad ProductDetailsPage");
+  }
+
+  getProductDetails(id) {
+    this.http
+      .get(`http://127.0.0.1:8000/api/Product/${id}`)
+      .subscribe((data: any) => {
+        if (data) {
+          this.product = data.data.product[0];
+          this.images = data.data.images;
+          this.specs = data.data.specs;
+          console.log(this.product);
+          console.log(this.images);
+          console.log(this.specs);
+        } else {
+          alert("An error occurred on fetching Product details");
+        }
+      });
   }
 
   async addToCart(product) {
@@ -45,7 +65,6 @@ export class ProductDetailsPage {
           amount: parseFloat(product.price)
         });
       } else {
-
         let added = false;
 
         for (let i = 0; i < data.length; i++) {
