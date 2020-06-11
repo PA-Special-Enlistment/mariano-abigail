@@ -9,6 +9,7 @@ import { ProductsByCategoryPage } from '../pages/products-by-category/products-b
 import { Product } from '../models/Product';
 import { ProductManager } from '../models/ProductManager';
 import { Brand } from '../models/Brand';
+import { SignupPage } from '../pages/signup/signup';
 
 @Component({
   templateUrl: 'app.html'
@@ -16,7 +17,7 @@ import { Brand } from '../models/Brand';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = SignupPage;
 
   brands: Brand[] = [];
 
