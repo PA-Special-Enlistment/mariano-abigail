@@ -1,19 +1,25 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
+import { NavController, NavParams, AlertController } from "ionic-angular";
 import { User } from "../../models/User";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { HttpClient } from "@angular/common/http";
+import { ShopEaseService } from "../../services/shop_ease.service";
+import { LoginPage } from "../login/login";
 
 @Component({
   selector: "page-signup",
   templateUrl: "signup.html"
 })
 export class SignupPage {
-
-  // newUser = new User();
-  billing_shipping_same = false;
   userForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public formBuilder: FormBuilder,
+    private shopEaseService: ShopEaseService,
+    private alertCtrl: AlertController
+  ) {
     this.setUserFormValidationn();
   }
 
@@ -23,30 +29,18 @@ export class SignupPage {
 
   setUserFormValidationn() {
     this.userForm = this.formBuilder.group({
-      last_name: ['', Validators.required],
-      first_name: ['', Validators.required],
-      email: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      confirm_password: ['', Validators.required],
-      s_address_1: ['', Validators.required],
-      s_address_2: [''],
-      s_country: ['', Validators.required],
-      s_province: ['', Validators.required],
-      s_city: ['', Validators.required],
-      s_phone: ['', Validators.required],
-      b_address_1: ['', Validators.required],
-      b_address_2: [''],
-      b_country: ['', Validators.required],
-      b_province: ['', Validators.required],
-      b_city: ['', Validators.required],
-      b_phone: ['', Validators.required],
+      last_name: ["", Validators.required],
+      first_name: ["", Validators.required],
+      email: ["", Validators.required],
+      username: ["", Validators.required],
+      password: ["", Validators.required],
+      confirm_password: ["", Validators.required],
+      s_address: ["", Validators.required],
+      s_country: ["", Validators.required],
+      s_province: ["", Validators.required],
+      s_city: ["", Validators.required],
+      s_phone: ["", Validators.required]
     });
-  }
-
-  setBillingToShipping() {
-    this.billing_shipping_same = !this.billing_shipping_same;
-    this.resetBillingInformationControl();
   }
 
   // checkEmail() {
@@ -101,32 +95,30 @@ export class SignupPage {
     const invalid = [];
     const controls = this.userForm.controls;
     for (const name in controls) {
-        if (controls[name].invalid) {
-            invalid.push(name);
-        }
+      if (controls[name].invalid) {
+        invalid.push(name);
+      }
     }
     return invalid;
-}
+  }
 
   signup() {
-
-    if (this.billing_shipping_same) {
-      this.userForm.get('b_address_1').setValue(this.userForm.value.s_address_1);
-      this.userForm.get('b_address_2').setValue(this.userForm.value.s_address_2);
-      this.userForm.get('b_country').setValue(this.userForm.value.s_country);
-      this.userForm.get('b_province').setValue(this.userForm.value.s_province);
-      this.userForm.get('b_city').setValue(this.userForm.value.s_city);
-      this.userForm.get('b_phone').setValue(this.userForm.value.s_phone);
-    }
-    
     //TODO: add field validation here
     if (this.userForm.invalid) {
-      alert("Form is invalid!");
+      console.log("UserForm is invalid");
+      this.alertCtrl
+      .create({
+        title: "Invalid",
+        message:
+          "Please fill all required fields.",
+        buttons: ["OK"]
+      })
+      .present();
       let invalid_controls = this.findInvalidControls();
-      console.log(invalid_controls)
+      console.log("Invalid fields: ", invalid_controls);
       return;
     } else {
-      alert("Valid!")
+      console.log("UserForm is valid");
       let userData = {
         user: {}
       };
@@ -137,34 +129,43 @@ export class SignupPage {
         first_name: this.userForm.value.first_name,
         username: this.userForm.value.username,
         password: this.userForm.value.password,
-        shipping_address: {
-          address_1: this.userForm.value.s_address_1,
-          address_2: this.userForm.value.s_address_2,
-          country: this.userForm.value.s_country,
-          province: this.userForm.value.s_province,
-          city: this.userForm.value.s_city,
-          phone: this.userForm.value.s_phone
-        },
-        billing_address: {
-          address_1: this.userForm.value.b_address_1,
-          address_2: this.userForm.value.b_address_2,
-          country: this.userForm.value.b_country,
-          province: this.userForm.value.b_province,
-          city: this.userForm.value.b_city,
-          phone: this.userForm.value.b_phone
-        }
+        address: this.userForm.value.s_address,
+        country: this.userForm.value.s_country,
+        province: this.userForm.value.s_province,
+        city: this.userForm.value.s_city,
+        phone: this.userForm.value.s_phone
       };
 
-      //TODO: Save data to db
+      this.shopEaseService.signup(userData.user).subscribe(data => {
+        console.log("Response: ", data);
+
+        if (data) {
+          this.alertCtrl
+            .create({
+              title: "Sign Up Successful",
+              message: "You will be redirected to Login page",
+              buttons: [
+                {
+                  text: "OK",
+                  handler: () => {
+                    this.userForm.reset();
+                    this.navCtrl.push(LoginPage);
+                  }
+                }
+              ]
+            })
+            .present();
+        } else {
+          this.alertCtrl
+            .create({
+              title: "Failed to Sign Up",
+              message:
+                "Please fill all required fields and make sure it's valid.",
+              buttons: ["OK"]
+            })
+            .present();
+        }
+      });
     }
-  }
-  
-  resetBillingInformationControl() {
-    this.userForm.get('b_address_1').reset;
-    this.userForm.get('b_address_2').reset;
-    this.userForm.get('b_country').reset;
-    this.userForm.get('b_province').reset;
-    this.userForm.get('b_city').reset;
-    this.userForm.get('b_phone').reset;
   }
 }

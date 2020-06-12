@@ -60,7 +60,7 @@
           <p>Check your orders</p>
         </ion-item>
 
-      <ion-item *ngIf="isLoggedIn" (click)="openPage('logout')" menuClose>
+      <ion-item *ngIf="isLoggedIn" (click)="logout()" menuClose>
         <ion-icon name="log-out" item-left large></ion-icon>
         <h2 class="name-label">Logout</h2>
         <p>of your account</p>

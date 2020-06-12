@@ -1,21 +1,17 @@
 import { Component, ViewChild } from "@angular/core";
-import { Nav, Platform, ModalController } from "ionic-angular";
+import { Nav, Platform, ModalController, AlertController } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
 import { HomePage } from "../pages/home/home";
-import { ListPage } from "../pages/list/list";
 import { ProductsByCategoryPage } from "../pages/products-by-category/products-by-category";
-import { Product } from "../models/Product";
 import { ProductManager } from "../models/ProductManager";
 import { Brand } from "../models/Brand";
 import { SignupPage } from "../pages/signup/signup";
 import { LoginPage } from "../pages/login/login";
-import { CheckoutPage } from "../pages/checkout/checkout";
 import { CartModalPage } from "../pages/cart-modal/cart-modal";
 import { Storage } from "@ionic/storage";
 import { OrderListPage } from "../pages/order-list/order-list";
-import { OrderDetailsPage } from "../pages/order-details/order-details";
 import { ShopEaseService } from "../services/shop_ease.service";
 
 @Component({
@@ -37,7 +33,8 @@ export class MyApp {
     public productManager: ProductManager,
     public modalCtrl: ModalController,
     public storage: Storage,
-    public shopEaseService: ShopEaseService
+    public shopEaseService: ShopEaseService,
+    public alertCtrl: AlertController
   ) {
     this.brands = [];
     this.user = {};
@@ -57,24 +54,24 @@ export class MyApp {
       if (response) {
         this.isLoggedIn = true;
         this.user = response;
-        console.log("Creds ", response)
+        console.log("Creds ", response);
       } else {
         this.isLoggedIn = false;
       }
-    })
+    });
 
     this.storage.ready().then(() => {
-      this.storage.get("userLoginInfo").then((data) => {
+      this.storage.get("userLoginInfo").then(data => {
         if (data) {
-          console.log("User logged in..... ", data)
+          console.log("User logged in..... ", data);
           this.user = data;
           this.isLoggedIn = true;
         } else {
-          console.log("No user found.")
+          console.log("No user found.");
           this.user = {};
           this.isLoggedIn = false;
         }
-      })
+      });
     });
   }
 
@@ -121,14 +118,23 @@ export class MyApp {
     } else if (pageName == "cart") {
       let modal = this.modalCtrl.create(CartModalPage);
       modal.present();
-    } else if (pageName == 'orders') {
+    } else if (pageName == "orders") {
       this.nav.push(OrderListPage);
-    } else if (pageName == "logout") {
-      // this.nav.push("");
-      this.storage.remove("userLoginInfo").then(() => {
-        this.user = {};
-        this.isLoggedIn = false;
-      })
     }
+  }
+
+  logout() {
+    this.storage.remove("userLoginInfo").then(() => {
+      this.user = {};
+      this.isLoggedIn = false;
+
+      this.alertCtrl
+        .create({
+          title: "Logout",
+          message: "It's sad to see you go.. we'll miss you!",
+          buttons: ["OK"]
+        })
+        .present();
+    });
   }
 }

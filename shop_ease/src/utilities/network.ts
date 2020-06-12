@@ -1,4 +1,4 @@
-import { environment } from '../../environment/environment';
+import { environment } from '../environment/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as $ from 'jquery'
 
