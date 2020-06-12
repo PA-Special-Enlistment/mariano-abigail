@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductsModel extends Model
+class ProductSpecsModel extends Model
 {
-    protected $table = 'products';
+    protected $table = 'product_specs';
     protected $primaryKey = 'id';
     public $timestamps = false;
-    
 }
