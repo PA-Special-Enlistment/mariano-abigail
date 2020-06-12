@@ -33,4 +33,9 @@ class LoginController extends Controller
             return $failedData;
         }
     }
+    public function signup(Request $request){
+        // echo $request->first_name; exit;
+        $customers = CustomerModel::create($request->all());
+        return $customers;
+    }
 }

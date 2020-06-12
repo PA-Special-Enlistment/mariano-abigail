@@ -21,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('Products', 'ProductsController@index');
 Route::get('Product/{id}', 'ProductsController@show');
 Route::get('Login/{username}/{password}', 'LoginController@login');
+Route::post('Signup', 'LoginController@signup');
