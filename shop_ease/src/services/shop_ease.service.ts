@@ -45,4 +45,10 @@ export class ShopEaseService {
     const param = {}
     return this.http.post(`${environment.dev_url}/Checkout`, param);
   }
+
+  public getProductDetails(id): Observable<any> {
+    console.log("GET: getProductDetails");
+    console.log("Params: ", id);
+    return this.http.get(`${environment.dev_url}/Product/${id}`, id);
+  }
 }

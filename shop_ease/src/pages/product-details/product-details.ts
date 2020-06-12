@@ -9,6 +9,7 @@ import {
 import { Storage } from "@ionic/storage";
 import { CartModalPage } from "../cart-modal/cart-modal";
 import { HttpClient } from "@angular/common/http";
+import { ShopEaseService } from "../../services/shop_ease.service";
 
 @Component({
   selector: "page-product-details",
@@ -17,9 +18,12 @@ import { HttpClient } from "@angular/common/http";
 export class ProductDetailsPage {
   @ViewChild("productSlides") productSlides: Slide;
 
-  product: any = {};
-  specs: any = [];
-  images: any = [];
+  product: any = {
+    images: [],
+    specs: []
+  };
+  shoeSizes = [];
+  shoeSize: any;
 
   constructor(
     public navCtrl: NavController,
@@ -27,10 +31,11 @@ export class ProductDetailsPage {
     public storage: Storage,
     public toastCtrl: ToastController,
     public modalCtrl: ModalController,
-    public http: HttpClient
+    public shopEaseService: ShopEaseService
   ) {
     let product_id = this.navParams.get("product_id");
     this.getProductDetails(product_id);
+    this.shoeSizes = ['4 UK', '5 UK', '6 UK', '7 UK', '8 UK', '9 UK', '10 UK'];
   }
 
   ionViewDidLoad() {
@@ -38,23 +43,26 @@ export class ProductDetailsPage {
   }
 
   getProductDetails(id) {
-    this.http
-      .get(`http://127.0.0.1:8000/api/Product/${id}`)
-      .subscribe((data: any) => {
-        if (data) {
-          this.product = data.data.product[0];
-          this.images = data.data.images;
-          this.specs = data.data.specs;
-          console.log(this.product);
-          console.log(this.images);
-          console.log(this.specs);
-        } else {
-          alert("An error occurred on fetching Product details");
-        }
-      });
+
+    this.shopEaseService.getProductDetails(id).subscribe((data: any) => {
+      if (data) {
+        this.product = data.data.product;
+        this.product.images = data.data.images;
+        this.product.specs = data.data.specs;
+        console.log(this.product);
+      } else {
+        alert("An error occurred on fetching Product details");
+      }
+    });
   }
 
   async addToCart(product) {
+
+    if (!this.shoeSize) {
+      alert('Please select your size first.')
+      return;
+    }
+
     this.storage.get("cart").then(data => {
       if (data == null || data.length == 0) {
         data = [];
