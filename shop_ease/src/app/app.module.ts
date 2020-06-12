@@ -19,6 +19,7 @@ import { CheckoutPage } from '../pages/checkout/checkout';
 import { OrderListPage } from '../pages/order-list/order-list';
 import { OrderDetailsPage } from '../pages/order-details/order-details';
 import { HttpClientModule } from '@angular/common/http';
+import { ShopEaseService } from '../services/shop_ease.service';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ProductManager
+    ProductManager,
+    ShopEaseService
   ]
 })
 export class AppModule {}
