@@ -22,3 +22,5 @@ Route::get('Products', 'ProductsController@index');
 Route::get('Product/{id}', 'ProductsController@show');
 Route::get('Login/{username}/{password}', 'LoginController@login');
 Route::post('Signup', 'LoginController@signup');
+
+Route::post('Checkout', 'CheckoutController@store');
