@@ -16,6 +16,7 @@ import { CartModalPage } from "../pages/cart-modal/cart-modal";
 import { Storage } from "@ionic/storage";
 import { OrderListPage } from "../pages/order-list/order-list";
 import { OrderDetailsPage } from "../pages/order-details/order-details";
+import { ShopEaseService } from "../services/shop_ease.service";
 
 @Component({
   templateUrl: "app.html"
@@ -25,9 +26,9 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  user = {};
   brands: Brand[] = [];
-  isLoggedIn = true;
+  isLoggedIn = false;
+  user: any;
 
   constructor(
     public platform: Platform,
@@ -35,10 +36,12 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public productManager: ProductManager,
     public modalCtrl: ModalController,
-    public storage: Storage
+    public storage: Storage,
+    public shopEaseService: ShopEaseService
   ) {
-    this.initializeApp();
     this.brands = [];
+    this.user = {};
+    this.initializeApp();
     this.getBrands();
   }
 
@@ -48,6 +51,30 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+    });
+
+    this.shopEaseService.credentials.subscribe(response => {
+      if (response) {
+        this.isLoggedIn = true;
+        this.user = response;
+        console.log("Creds ", response)
+      } else {
+        this.isLoggedIn = false;
+      }
+    })
+
+    this.storage.ready().then(() => {
+      this.storage.get("userLoginInfo").then((data) => {
+        if (data) {
+          console.log("User logged in..... ", data)
+          this.user = data;
+          this.isLoggedIn = true;
+        } else {
+          console.log("No user found.")
+          this.user = {};
+          this.isLoggedIn = false;
+        }
+      })
     });
   }
 
@@ -89,8 +116,8 @@ export class MyApp {
     if (pageName == "signup") {
       this.nav.push(SignupPage);
     } else if (pageName == "login") {
-      // this.nav.push(LoginPage);
-      this.isLoggedIn = true;
+      this.nav.push(LoginPage);
+      // this.isLoggedIn = true;
     } else if (pageName == "cart") {
       let modal = this.modalCtrl.create(CartModalPage);
       modal.present();
