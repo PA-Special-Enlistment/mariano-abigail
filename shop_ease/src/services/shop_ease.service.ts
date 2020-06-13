@@ -42,13 +42,24 @@ export class ShopEaseService {
   public checkout(order: any): Observable<any> {
     console.log("POST: Signup");
     console.log("Params: ", order);
-    const param = {}
-    return this.http.post(`${environment.dev_url}/Checkout`, param);
+    return this.http.post(`${environment.dev_url}/Checkout`, order);
   }
 
   public getProductDetails(id): Observable<any> {
     console.log("GET: getProductDetails");
     console.log("Params: ", id);
     return this.http.get(`${environment.dev_url}/Product/${id}`, id);
+  }
+
+  public getOrderDetails(id): Observable<any> {
+    console.log("GET: getOrderDetails");
+    console.log("Params: ", id);
+    return this.http.get(`${environment.dev_url}/OrderDetails`, id);
+  }
+
+  public getProductsByBrand(id): Observable<any> {
+    console.log("GET: getProductsByCategory");
+    console.log("Params: ", id);
+    return this.http.get(`${environment.dev_url}/Products/Brand/${id}`, id);
   }
 }

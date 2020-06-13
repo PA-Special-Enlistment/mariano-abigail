@@ -3,40 +3,42 @@ import { NavController, NavParams } from "ionic-angular";
 import { ProductDetailsPage } from "../product-details/product-details";
 import { ProductManager } from "../../models/ProductManager";
 import { Product } from "../../models/Product";
+import { ShopEaseService } from "../../services/shop_ease.service";
 
 @Component({
   selector: "page-products-by-category",
   templateUrl: "products-by-category.html"
 })
 export class ProductsByCategoryPage {
-  selectedBrand;
   filteredProducts: Product[] = [];
+  products: any;
+  showEmptyPageMessage = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public productManager: ProductManager
+    public productManager: ProductManager,
+    public shopEaseService: ShopEaseService
   ) {
-    this.selectedBrand = this.navParams.get("brand");
-    this.filterProducts();
+    let id = this.navParams.get("brand_id");
+    this.getProductsByBrand(id);
   }
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad ProductsByCategoryPage");
   }
 
-  openProductsPage(product) {
-    this.navCtrl.push(ProductDetailsPage, { product: product });
+  openProductsPage(id) {
+    this.navCtrl.push(ProductDetailsPage, { product_id: id });
   }
 
-  filterProducts() {
-    //TODO: filter products by category. for in loop not working, product is tagged as string even though it is an object
-
-    let products: Product[] = this.productManager.getProducts();
-
-    for (let i = 0; i < products.length; i++) {
-      if (products[i].brand.name == this.selectedBrand)
-        this.filteredProducts.push(products[i]);
-    }
+  getProductsByBrand(id) {
+    this.shopEaseService.getProductsByBrand(id).subscribe(data => {
+      if (!data || data == null || data == []) {
+        this.showEmptyPageMessage = true;
+      } else {
+          this.products = data;
+      }
+    });
   }
 }
