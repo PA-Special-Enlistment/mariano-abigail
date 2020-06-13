@@ -8,20 +8,20 @@
   <ion-item-divider color="dark" class="name-label">Shipping Address</ion-item-divider>
   <ion-item>
     <ion-icon name="md-home" color="primary" item-left large></ion-icon>
-    <h2>Joseph Castelo</h2>
-    <h2>09153960030</h2>
-    <p>182 Brgy. Burgos, Sta. Rosa, Nueva Ecija</p>
+    <h2>{{ order.customer_name }}</h2>
+    <h2>{{ order.customer.phone }}</h2>
+    <p>{{ order.shipping_details }}</p>
   </ion-item>
 
   <ion-item-divider color="dark" class="name-label">Package</ion-item-divider>
-  <ion-item *ngFor="let i of [1,2,3]">
+  <ion-item *ngFor="let product of order.sales_products">
     <ion-thumbnail item-left>
       <img
-        src="https://assets.adidas.com/images/h_840,f_auto,q_auto:sensitive,fl_lossy/4290012d8fba42a48795ab0a00c8c50d_9366/Ultraboost_20_Shoes_Black_EG0698_01_standard.jpg" />
+        src="{{ product.image_url }}" />
     </ion-thumbnail>
-    <h2>Adidas Ultraboost 20</h2>
-    <h3>P9,500</h3>
-    <p>x1</p>
+    <h2>{{ product.brand }} {{ product.product_name }}</h2>
+    <h3>₱{{product.price}}</h3>
+    <p>x{{ product.qty }}</p>
   </ion-item>
 
   <ion-grid>
@@ -30,7 +30,7 @@
         Subtotal
       </ion-col>
       <ion-col style="text-align: right">
-        P15,000
+        ₱{{ order.total }}
       </ion-col>
     </ion-row>
     <ion-row>
@@ -38,7 +38,7 @@
         Shipping Fee
       </ion-col>
       <ion-col style="text-align: right">
-        Free
+        FREE
       </ion-col>
     </ion-row>
     <ion-row>
@@ -46,13 +46,13 @@
         <span class="name-label">Total</span>
       </ion-col>
       <ion-col style="text-align: right">
-        <span class="name-label">P15,000</span>
+        <span class="name-label">₱{{order.total}}</span>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-item-divider color="dark">Order #1234567</ion-item-divider>
+  <ion-item-divider color="dark">Order 000000{{order.sales_id}}</ion-item-divider>
   <ion-item>
-    <p>Placed on 11 Jun 2020 12:30:45</p>
+    <p>Placed on {{ order.created_date }}</p>
   </ion-item>
   <ion-item-divider color="dark">Payment Method</ion-item-divider>
   <ion-item>

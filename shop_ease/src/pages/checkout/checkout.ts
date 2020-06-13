@@ -1,26 +1,52 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
+import { NavController, NavParams, AlertController } from "ionic-angular";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ShopEaseService } from "../../services/shop_ease.service";
+import { Storage } from "@ionic/storage";
+import { User } from "../../models/User";
+import { OrderDetailsPage } from "../order-details/order-details";
+import { HomePage } from "../home/home";
 
 @Component({
   selector: "page-checkout",
   templateUrl: "checkout.html"
 })
 export class CheckoutPage {
-  // newOrder: any;
   orderForm: FormGroup;
   paymentMethods: any[];
   paymentMethod: any;
-  billing_shipping_same = false;
+  user: any;
+  cartItems: any;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public formBuilder: FormBuilder,
+    public shopEaseService: ShopEaseService,
+    public storage: Storage,
+    public alertCtrl: AlertController
   ) {
-    // this.newOrder = {};
     this.setOrderFormValidation();
     this.initializePaymentMethods();
+
+    this.storage.get("userLoginInfo").then(data => {
+      this.user = data;
+      console.log("Checkout user ", data)
+
+      this.orderForm.get("last_name").setValue(data.last_name);
+      this.orderForm.get("first_name").setValue(data.first_name);
+      this.orderForm.get("email").setValue(data.email);
+      this.orderForm.get("s_address").setValue(data.address);
+      this.orderForm.get("s_country").setValue(data.country);
+      this.orderForm.get("s_province").setValue(data.province);
+      this.orderForm.get("s_city").setValue(data.city);
+      this.orderForm.get("s_phone").setValue(data.phone);
+    });
+
+    this.storage.get("cart").then(data => {
+      this.cartItems = data;
+      console.log("Checkout cart ", data)
+    });
   }
 
   ionViewDidLoad() {
@@ -32,53 +58,101 @@ export class CheckoutPage {
       last_name: ["", Validators.required],
       first_name: ["", Validators.required],
       email: ["", Validators.required],
-      username: ["", Validators.required],
-      password: ["", Validators.required],
-      confirm_password: ["", Validators.required],
-      s_address_1: ["", Validators.required],
-      s_address_2: [""],
-      s_country: ["", Validators.required],
-      s_province: ["", Validators.required],
-      s_city: ["", Validators.required],
+      s_address: ["", Validators.required],
+      s_country: ["PH", Validators.required],
+      s_province: ["Nueva Ecija", Validators.required],
+      s_city: ["Lupao", Validators.required],
       s_phone: ["", Validators.required],
-      b_address_1: ["", Validators.required],
-      b_address_2: [""],
-      b_country: ["", Validators.required],
-      b_province: ["", Validators.required],
-      b_city: ["", Validators.required],
-      b_phone: ["", Validators.required],
-      paymentMethod: ["", Validators.required]
+      payment_method: ["", Validators.required]
     });
   }
 
   initializePaymentMethods() {
     this.paymentMethods = [
       { method_id: "cod", method_title: "Cash on Delivery" },
-      { method_id: "paypal", method_title: "Paypal" },
+      { method_id: "paypal", method_title: "Paypal" }
       // { method_id: "gcash", method_title: "GCash" },
       // { method_id: "wechat", method_title: "WechatPay" }
     ];
   }
 
-  setBillingToShipping() {
-    this.billing_shipping_same = !this.billing_shipping_same;
-    this.resetBillingInformationControl();
-  }
-
-  resetBillingInformationControl() {
-    this.orderForm.get("b_address_1").reset;
-    this.orderForm.get("b_address_2").reset;
-    this.orderForm.get("b_country").reset;
-    this.orderForm.get("b_province").reset;
-    this.orderForm.get("b_city").reset;
-    this.orderForm.get("b_phone").reset;
-  }
-
-  disableOption(paymentMethod) {
-    if (paymentMethod == "gcash" && paymentMethod == "wechat") {
-      return true;
+  findInvalidControls() {
+    const invalid = [];
+    const controls = this.orderForm.controls;
+    for (const name in controls) {
+      if (controls[name].invalid) {
+        invalid.push(name);
+      }
     }
+    return invalid;
+  }
 
-    return false;
+  checkout() {
+    //TODO: add field validation here
+    if (this.orderForm.invalid) {
+      alert("Orderform is invalid");
+      let invalid_controls = this.findInvalidControls();
+      console.log("Invalid fields: ", invalid_controls);
+      return;
+    } else {
+      console.log("UserForm is valid");
+      let orderData = {};
+
+      let total = 0;
+      let items = [];
+
+      this.cartItems.forEach((item, index) => {
+        total += (item.product.price * item.qty);
+        items.push({
+          product_id: item.product.id,
+          qty: item.qty
+        })
+      });
+
+      orderData = {
+        customer_id: this.user.id,
+        products: items,
+        payment_method: this.orderForm.value.payment_method,
+        total: total
+      };
+
+      console.log("Order data = ", orderData)
+
+      this.shopEaseService.checkout(orderData).subscribe(data => {
+        console.log("Response: ", data);
+
+        if (data) {
+
+          this.storage.remove("cart");
+
+          this.alertCtrl
+          .create({
+            title: "Checkout Successful",
+            message: `Your order has been placed with Order Number ${data.sales_id}.`,
+            buttons: [
+              {
+                text: "OK",
+                handler: () => {
+                  this.navCtrl.popToRoot();
+                }
+              },
+              {
+                text: "View Order",
+                handler: () => {
+                  this.navCtrl.push(OrderDetailsPage, { order: data })
+                }
+              }
+            ]
+          })
+          .present();
+        } else {
+          alert("Failed to place oreder");
+        }
+      });
+
+      // this.http.post("http://127.0.0.1:8000/api/Signup", userData.user).subscribe(data => {
+      //   console.log("Signup response ", data)
+      // })
+    }
   }
 }
