@@ -20,7 +20,7 @@
 
     <ion-list>
 
-      <ion-item *ngFor="let brand of brands" (click)="openProductsByCategoryPage(brand.name)" menuClose>
+      <ion-item *ngFor="let brand of brands" (click)="openProductsByCategoryPage(brand.id)" menuClose>
         <ion-thumbnail item-left>
           <img src="{{ brand.logoUrl }}" />
         </ion-thumbnail>

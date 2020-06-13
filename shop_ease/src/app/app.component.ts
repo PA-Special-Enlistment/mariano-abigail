@@ -77,18 +77,21 @@ export class MyApp {
 
   getBrands() {
     let brand1 = new Brand();
+    brand1.id = 1;
     brand1.name = "Adidas";
     brand1.description = "All in or Nothing";
     brand1.logoUrl =
       "https://cloud.melijoe.com/p/f58b2842_1549938601_z_adidas-originals_252960_B.jpg";
 
     let brand2 = new Brand();
+    brand2.id = 2
     brand2.name = "Nike";
     brand2.description = "Just Do It";
     brand2.logoUrl =
       "https://n.sinaimg.cn/front/462/w241h221/20190313/QNkr-hufnxfn0149679.jpg";
 
     let brand3 = new Brand();
+    brand3.id = 3;
     brand3.name = "Jordan";
     brand3.description = "Become Legendary";
     brand3.logoUrl =
@@ -103,10 +106,8 @@ export class MyApp {
     this.nav.setRoot(HomePage);
   }
 
-  openProductsByCategoryPage(brand) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(ProductsByCategoryPage, { brand: brand });
+  openProductsByCategoryPage(id) {
+    this.nav.setRoot(ProductsByCategoryPage, { brand_id: id });
   }
 
   openPage(pageName: string) {
