@@ -35,4 +35,14 @@ class ProductsController extends Controller
         // print_r($data); exit;
         return compact('data', $data);
     }
+    public function filter($id){
+        $products = ProductsModel::select('products.id', 'products.name as product_name',  'brands.name as brand', 'category', 'price', 'products.description', 'products.short_desc', 'image_url')
+        ->join('brands', 'products.brand_id', '=', 'brands.id')
+        ->leftJoin('product_images', 'products.id', '=', 'product_images.product_id')
+        ->where('brands.id', $id)
+        ->groupBy('products.id')
+        ->get();
+
+        return $products;
+    }
 }
