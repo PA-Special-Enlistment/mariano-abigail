@@ -8,13 +8,13 @@
   <ion-item-divider color="dark" class="name-label">Shipping Address</ion-item-divider>
   <ion-item>
     <ion-icon name="md-home" color="primary" item-left large></ion-icon>
-    <h2>{{ order.customer_name }}</h2>
-    <h2>{{ order.customer.phone }}</h2>
-    <p>{{ order.shipping_details }}</p>
+    <h2>{{ order?.customer_name }}</h2>
+    <h2>{{ order?.customer.phone }}</h2>
+    <p>{{ order?.shipping_details }}</p>
   </ion-item>
 
   <ion-item-divider color="dark" class="name-label">Package</ion-item-divider>
-  <ion-item *ngFor="let product of order.sales_products">
+  <ion-item *ngFor="let product of order?.sales_products">
     <ion-thumbnail item-left>
       <img
         src="{{ product.image_url }}" />
@@ -30,7 +30,7 @@
         Subtotal
       </ion-col>
       <ion-col style="text-align: right">
-        ₱{{ order.total }}
+        ₱{{ order?.total }}
       </ion-col>
     </ion-row>
     <ion-row>
@@ -46,13 +46,13 @@
         <span class="name-label">Total</span>
       </ion-col>
       <ion-col style="text-align: right">
-        <span class="name-label">₱{{order.total}}</span>
+        <span class="name-label">₱{{order?.total}}</span>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-item-divider color="dark">Order 000000{{order.sales_id}}</ion-item-divider>
+  <ion-item-divider color="dark">Order 000000010</ion-item-divider>
   <ion-item>
-    <p>Placed on {{ order.created_date }}</p>
+    <p>Placed on {{ order?.created_date }}</p>
   </ion-item>
   <ion-item-divider color="dark">Payment Method</ion-item-divider>
   <ion-item>

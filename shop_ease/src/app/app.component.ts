@@ -126,6 +126,7 @@ export class MyApp {
 
   logout() {
     this.storage.remove("userLoginInfo").then(() => {
+      this.storage.remove("cart");
       this.user = {};
       this.isLoggedIn = false;
 

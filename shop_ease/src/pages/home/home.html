@@ -25,7 +25,7 @@
         <ion-slide *ngFor="let product of products" (click)="openProductsPage(product.id)">
           <ion-card no-padding>
             <img *ngIf="product.image_url" [src]="product.image_url" />
-            <h1 padding center class="name-label"> {{ product.brand.name }} {{ product.name }} </h1>
+            <h1 padding center class="name-label"> {{ product.brand }} {{ product.product_name }} </h1>
             <p padding center>{{ product.description }}</p>
           </ion-card>
         </ion-slide>
