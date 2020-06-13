@@ -11,6 +11,7 @@ export class ProductManager {
         product_code: "M20324",
         name: "Stan Smith Shoes",
         brand: {
+          id: 1,
           name: "Adidas",
           description: "All in or Nothing.",
           logoUrl:
@@ -41,6 +42,7 @@ export class ProductManager {
         product_code: "EG0691",
         name: "Ultraboost 20 Shoes",
         brand: {
+          id: 1,
           name: "Adidas",
           description: "All in or Nothing.",
           logoUrl:
@@ -71,6 +73,7 @@ export class ProductManager {
         product_code: "G27706",
         name: "Continental 80 Shoes",
         brand: {
+          id: 1,
           name: "Adidas",
           description: "All in or Nothing.",
           logoUrl:
@@ -102,6 +105,7 @@ export class ProductManager {
         product_code: "EE4599",
         name: "Fitbounce Trainers",
         brand: {
+          id: 1,
           name: "Adidas",
           description: "All in or Nothing.",
           logoUrl:
@@ -132,6 +136,7 @@ export class ProductManager {
         product_code: "EG4958",
         name: "Disney Mickey Mouse Superstar Shoes",
         brand: {
+          id: 1,
           name: "Adidas",
           description: "All in or Nothing.",
           logoUrl:
@@ -160,6 +165,7 @@ export class ProductManager {
         product_code: "288022",
         name: "Adilette Slides",
         brand: {
+          id: 1,
           name: "Adidas",
           description: "All in or Nothing.",
           logoUrl:
@@ -189,6 +195,7 @@ export class ProductManager {
         product_code: "CJ0611",
         name: "Air Max 90 Premium",
         brand: {
+          id: 2,
           name: "Nike",
           description: "Just Do It.",
           logoUrl:
@@ -216,6 +223,7 @@ export class ProductManager {
         product_code: "CJ1642",
         name: "Air Force 1 Sage Low",
         brand: {
+          id: 2,
           name: "Nike",
           description: "Just Do It.",
           logoUrl:
@@ -242,6 +250,7 @@ export class ProductManager {
         product_code: "921733",
         name: "Airmax 97",
         brand: {
+          id: 2,
           name: "Nike",
           description: "Just Do It.",
           logoUrl:
@@ -268,6 +277,7 @@ export class ProductManager {
         product_code: "AQ2731",
         name: "Joyride Run Flyknit",
         brand: {
+          id: 2,
           name: "Nike",
           description: "Just Do It.",
           logoUrl:
@@ -295,6 +305,7 @@ export class ProductManager {
         product_code: "705265",
         name: "SB Check",
         brand: {
+          id: 2,
           name: "Nike",
           description: "Just Do It.",
           logoUrl:
