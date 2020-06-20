@@ -39,3 +39,7 @@
 ion-textarea:focus, ion-input:focus{
     outline: none;
 }
+
+ion-header button.back-button {
+    color: $myPrimary;
+}

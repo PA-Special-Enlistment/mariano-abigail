@@ -74,7 +74,15 @@ export class CartModalPage {
       return;
     } else {
       this.storage.get("userLoginInfo").then(data => {
-        data ? this.navCtrl.push(CheckoutPage) : this.navCtrl.push(LoginPage, { next: CheckoutPage });
+        if (data) {
+          this.navCtrl.push(CheckoutPage).then(_ => {
+            this.closeModal();
+          });
+        } else {
+          this.navCtrl.push(LoginPage, { next: CheckoutPage }).then(_ => {
+            this.closeModal();
+          });
+        }
       });
     }
   }

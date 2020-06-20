@@ -31,7 +31,7 @@ export class CheckoutPage {
 
     this.storage.get("userLoginInfo").then(data => {
       this.user = data;
-      console.log("Checkout user ", data)
+      console.log("Checkout user ", data);
 
       this.orderForm.get("last_name").setValue(data.last_name);
       this.orderForm.get("first_name").setValue(data.first_name);
@@ -45,7 +45,7 @@ export class CheckoutPage {
 
     this.storage.get("cart").then(data => {
       this.cartItems = data;
-      console.log("Checkout cart ", data)
+      console.log("Checkout cart ", data);
     });
   }
 
@@ -102,11 +102,11 @@ export class CheckoutPage {
       let items = [];
 
       this.cartItems.forEach((item, index) => {
-        total += (item.product.price * item.qty);
+        total += item.product.price * item.qty;
         items.push({
           product_id: item.product.id,
           qty: item.qty
-        })
+        });
       });
 
       orderData = {
@@ -116,35 +116,34 @@ export class CheckoutPage {
         total: total
       };
 
-      console.log("Order data = ", orderData)
+      console.log("Order data = ", orderData);
 
       this.shopEaseService.checkout(orderData).subscribe(data => {
         console.log("Response: ", data);
 
         if (data) {
-
           this.storage.remove("cart");
 
           this.alertCtrl
-          .create({
-            title: "Checkout Successful",
-            message: `Your order has been placed with Order Number ${data.sales_id}.`,
-            buttons: [
-              {
-                text: "OK",
-                handler: () => {
-                  this.navCtrl.popToRoot();
+            .create({
+              title: "Checkout Successful",
+              message: `Your order has been placed with Order Number ${data.sales_id}.`,
+              buttons: [
+                {
+                  text: "OK",
+                  handler: () => {
+                    this.navCtrl.popToRoot();
+                  }
+                },
+                {
+                  text: "View Order",
+                  handler: () => {
+                    this.navCtrl.push(OrderDetailsPage, { order: data });
+                  }
                 }
-              },
-              {
-                text: "View Order",
-                handler: () => {
-                  this.navCtrl.push(OrderDetailsPage, { order: data })
-                }
-              }
-            ]
-          })
-          .present();
+              ]
+            })
+            .present();
         } else {
           alert("Failed to place oreder");
         }
