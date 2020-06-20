@@ -6,6 +6,7 @@ import { ProductManager } from "../../models/ProductManager";
 import { HttpClient } from "@angular/common/http";
 import { Storage } from "@ionic/storage";
 import { ShopEaseService } from "../../services/shop_ease.service";
+import { ProductsByCategoryPage } from "../products-by-category/products-by-category";
 
 @Component({
   selector: "page-home",
@@ -16,6 +17,7 @@ export class HomePage {
 
   products: any[];
   banners = [];
+  searchQuery: string;
 
   constructor(
     public navCtrl: NavController,
@@ -58,5 +60,13 @@ export class HomePage {
 
   openProductsPage(id) {
     this.navCtrl.push(ProductDetailsPage, { product_id: id });
+  }
+
+  onSearch(event) {
+    if (this.searchQuery.length > 0) {
+      this.navCtrl.push(ProductsByCategoryPage, { "searchQuery": this.searchQuery });
+    } else {
+      alert("Please enter your query.")
+    }
   }
 }
