@@ -19,6 +19,7 @@ import { OrderListPage } from '../pages/order-list/order-list';
 import { OrderDetailsPage } from '../pages/order-details/order-details';
 import { HttpClientModule } from '@angular/common/http';
 import { ShopEaseService } from '../services/shop_ease.service';
+import { PayPal } from '@ionic-native/paypal/ngx';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ShopEaseService } from '../services/shop_ease.service';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProductManager,
-    ShopEaseService
+    ShopEaseService,
+    PayPal
   ]
 })
 export class AppModule {}
