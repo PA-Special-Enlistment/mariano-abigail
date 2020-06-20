@@ -12,7 +12,9 @@ import { ShopEaseService } from "../../services/shop_ease.service";
 export class ProductsByCategoryPage {
   filteredProducts: Product[] = [];
   products: any;
+  page: number;
   showEmptyPageMessage = false;
+  title = "";
 
   constructor(
     public navCtrl: NavController,
@@ -20,8 +22,17 @@ export class ProductsByCategoryPage {
     public productManager: ProductManager,
     public shopEaseService: ShopEaseService
   ) {
+    this.products = [];
+    this.page = 1;
+    this.title = this.navParams.get("title");
     let id = this.navParams.get("brand_id");
-    this.getProductsByBrand(id);
+
+    if (id) {
+      this.getProductsByBrand(id);
+    } else {
+      let searchString = this.navParams.get("searchString");
+      this.searchProduct(searchString);
+    }
   }
 
   ionViewDidLoad() {
@@ -34,10 +45,22 @@ export class ProductsByCategoryPage {
 
   getProductsByBrand(id) {
     this.shopEaseService.getProductsByBrand(id).subscribe(data => {
-      if (!data || data == null || data == []) {
+      if (data.length == 0) {
         this.showEmptyPageMessage = true;
       } else {
-          this.products = data;
+        this.products = data;
+        this.showEmptyPageMessage = false;
+      }
+    });
+  }
+
+  searchProduct(string) {
+    this.shopEaseService.getProducts(this.page, string).subscribe(response => {
+      if (response.data.length == 0) {
+        this.showEmptyPageMessage = true;
+      } else {
+        this.products = response.data;
+        this.showEmptyPageMessage = false;
       }
     });
   }

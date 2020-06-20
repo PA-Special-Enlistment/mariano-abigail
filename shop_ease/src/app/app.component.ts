@@ -107,7 +107,7 @@ export class MyApp {
   }
 
   openProductsByCategoryPage(id) {
-    this.nav.setRoot(ProductsByCategoryPage, { brand_id: id });
+    this.nav.setRoot(ProductsByCategoryPage, { "title": "Product by Brand", brand_id: id });
   }
 
   openPage(pageName: string) {

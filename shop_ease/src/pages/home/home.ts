@@ -16,8 +16,9 @@ export class HomePage {
   @ViewChild("productSlides") productSlides: Slides;
 
   products: any[];
+  page: number;
   banners = [];
-  searchQuery: string;
+  searchString= "";
 
   constructor(
     public navCtrl: NavController,
@@ -26,7 +27,7 @@ export class HomePage {
     public storage: Storage,
     public shopEaseService: ShopEaseService
   ) {
-    this.products = productManager.getProducts();
+    this.page = 1;
     this.banners = [
       "https://cdn.dribbble.com/users/2160766/screenshots/6776177/retouching_-_x_plr.jpg",
       "https://s3images.coroflot.com/user_files/individual_files/494449_8aGwx7GCIidNyrvAyQd9sfcwd.jpg"
@@ -45,17 +46,16 @@ export class HomePage {
   }
 
   getProducts() {
-    this.http
-      .get("http://127.0.0.1:8000/api/Products")
-      .subscribe((data: any) => {
-        console.log("Products response = ", data);
 
-        if (data) {
-          this.products = data;
-        } else {
-          alert("An error ocurred on fetching Products");
-        }
-      });
+    this.shopEaseService.getProducts(this.page, this.searchString).subscribe((response: any) => {
+      console.log("Products response = ", response);
+
+      if (response) {
+        this.products = response.data;
+      } else {
+        alert("An error ocurred on fetching Products");
+      }
+    });
   }
 
   openProductsPage(id) {
@@ -63,8 +63,8 @@ export class HomePage {
   }
 
   onSearch(event) {
-    if (this.searchQuery.length > 0) {
-      this.navCtrl.push(ProductsByCategoryPage, { "searchQuery": this.searchQuery });
+    if (this.searchString.length > 0) {
+      this.navCtrl.push(ProductsByCategoryPage, { "title": "Search Result", "searchString": this.searchString });
     } else {
       alert("Please enter your query.")
     }

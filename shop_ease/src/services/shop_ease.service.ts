@@ -39,8 +39,15 @@ export class ShopEaseService {
     );
   }
 
+  public getProducts(p, s): Observable<any> {
+    console.log("GET: getProducts");
+    return this.http.get(`${environment.dev_url}/Products`, {
+      params: { page: p, search: s }
+    });
+  }
+
   public checkout(order: any): Observable<any> {
-    console.log("POST: Signup");
+    console.log("POST: Checkout");
     console.log("Params: ", order);
     return this.http.post(`${environment.dev_url}/Checkout`, order);
   }
@@ -48,7 +55,7 @@ export class ShopEaseService {
   public getProductDetails(id): Observable<any> {
     console.log("GET: getProductDetails");
     console.log("Params: ", id);
-    return this.http.get(`${environment.dev_url}/Product/${id}`, id);
+    return this.http.get(`${environment.dev_url}/Product/${id}`);
   }
 
   public getOrderDetails(id): Observable<any> {
