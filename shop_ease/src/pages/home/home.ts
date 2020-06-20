@@ -18,22 +18,22 @@ export class HomePage {
   products: any[];
   page: number;
   banners = [];
-  searchString= "";
+  searchString = "";
 
   constructor(
     public navCtrl: NavController,
     public productManager: ProductManager,
     public http: HttpClient,
     public storage: Storage,
-    public shopEaseService: ShopEaseService
+    public shopEaseService: ShopEaseService,
+    public toastCtrl: ToastController
   ) {
-    this.page = 1;
     this.banners = [
       "https://cdn.dribbble.com/users/2160766/screenshots/6776177/retouching_-_x_plr.jpg",
       "https://s3images.coroflot.com/user_files/individual_files/494449_8aGwx7GCIidNyrvAyQd9sfcwd.jpg"
     ];
 
-    this.getProducts();
+    this.loadProducts(null);
   }
 
   ionViewDidLoad() {
@@ -45,17 +45,40 @@ export class HomePage {
     }, 3000);
   }
 
-  getProducts() {
+  loadProducts(event) {
+    console.log(event);
+    if (event == null) {
+      this.page = 1;
+      this.products = [];
+    } else {
+      this.page++;
+    }
 
-    this.shopEaseService.getProducts(this.page, this.searchString).subscribe((response: any) => {
-      console.log("Products response = ", response);
+    this.shopEaseService
+      .getProducts(this.page, this.searchString)
+      .subscribe((response: any) => {
+        console.log("Products response = ", response);
 
-      if (response) {
-        this.products = response.data;
-      } else {
-        alert("An error ocurred on fetching Products");
-      }
-    });
+        if (response) {
+          this.products = this.products.concat(response.data);
+
+          if (event != null) event.complete();
+
+          //disable infinite scroll when fetched product is 0.
+          if (response.data.length == 0) {
+            this.page -= 1;
+            event.enable(false);
+            let toast = this.toastCtrl
+              .create({
+                message: "No more products!",
+                duration: 3000
+              })
+              .present();
+          }
+        } else {
+          alert("An error ocurred on fetching Products");
+        }
+      });
   }
 
   openProductsPage(id) {
@@ -64,9 +87,12 @@ export class HomePage {
 
   onSearch(event) {
     if (this.searchString.length > 0) {
-      this.navCtrl.push(ProductsByCategoryPage, { "title": "Search Result", "searchString": this.searchString });
+      this.navCtrl.push(ProductsByCategoryPage, {
+        title: "Search Result",
+        searchString: this.searchString
+      });
     } else {
-      alert("Please enter your query.")
+      alert("Please enter your query.");
     }
   }
 }
