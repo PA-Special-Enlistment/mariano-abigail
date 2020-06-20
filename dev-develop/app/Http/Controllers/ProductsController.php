@@ -11,12 +11,16 @@ use App\Models\ProductSpecsModel;
 
 class ProductsController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         $products = ProductsModel::select('products.id', 'products.name as product_name',  'brands.name as brand', 'category', 'price', 'products.description', 'products.short_desc', 'image_url')
         ->join('brands', 'products.brand_id', '=', 'brands.id')
         ->leftJoin('product_images', 'products.id', '=', 'product_images.product_id')
+        ->where('products.name', 'LIKE', "%{$request->search}%")
+        ->orWhere('brands.name', 'LIKE', "%{$request->search}%")
+        ->orWhere('category', 'LIKE', "%{$request->search}%")
         ->groupBy('products.id')
-        ->get();
+        ->paginate(10);
+        // ->get();
 
         return $products;
     }
