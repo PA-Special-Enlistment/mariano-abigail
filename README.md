@@ -14,13 +14,19 @@ A Sneaker Store App
 
 - Signup
 - Login
-- Auto login
+- Auto Login
 - Display Products
+- Infinite Scroll
 - Filter Products by Brand
 - Search Products
+- Display Products
 - Display Product Details
 - Add to Cart
 - Checkout
 - Display Order List
 - Display Order Details
+- Logout
+
+
+
 
