@@ -17,6 +17,7 @@ A Sneaker Store App
 - Auto login
 - Display Products
 - Filter Products by Brand
+- Search Products
 - Display Product Details
 - Add to Cart
 - Checkout
